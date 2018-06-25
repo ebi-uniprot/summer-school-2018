@@ -1,0 +1,8 @@
+get All taxonomies: https://www.ebi.ac.uk/proteins/api/taxonomy/path/nodes?id=33090&direction=BOTTOM&pageNumber=1&pageSize=10
+
+Get Proteins: https://www.ebi.ac.uk/proteins/api/proteins?offset=0&size=100&reviewed=true&taxid=3702
+
+size=-1 (for proteins only, to stream all the request result)
+
+https://www.uniprot.org/uniprot/?query=reviewed:yes+AND+organism:9606&format=xml
+
