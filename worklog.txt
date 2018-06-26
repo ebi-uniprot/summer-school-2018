@@ -6,3 +6,5 @@ size=-1 (for proteins only, to stream all the request result)
 
 https://www.uniprot.org/uniprot/?query=reviewed:yes+AND+organism:9606&format=xml
 
+
+https://stackoverflow.com/questions/12507206/python-how-to-completely-traverse-a-complex-dictionary-of-unknown-depth
