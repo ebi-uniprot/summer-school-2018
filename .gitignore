@@ -1,1 +1,7 @@
 __pycache__/
+
+.idea/
+# virtual environment:
+venv/
+
+json-samples/
