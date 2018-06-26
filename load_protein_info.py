@@ -19,8 +19,10 @@ class UniProtProtein:
         self.ec_numbers.append(ec_number)
 
     def __str__(self):
-        return '{}. InterPro groups: {} EC Numbers: {}'.format(
-            self.accession, self.ipr_groups, self.ec_numbers)
+        ip_groups = 'InterPro groups: {}'.format(self.ipr_groups)
+        ec_nums = 'EC Numbers: {}'.format(self.ec_numbers)
+        return '{}. {} {}'.format(
+            self.accession, ec_nums, ip_groups)
 
     def __repr__(self):
         return self.__str__()
@@ -60,32 +62,78 @@ def read_proteins(tax_id):
 
 
 def parse_protein_json(protein_data):
-    print(protein_data)
+    # print(protein_data)
     cur_protein = UniProtProtein(protein_data['accession'])
     for db_ref in protein_data['dbReferences']:
         if 'InterPro' == db_ref['type']:
             cur_protein.add_interpro_xref(db_ref['id'])
 
-    ec_numbers = extract_protein_ecs(protein_data)
+    ec_numbers = extract_protein_ecs_2(protein_data)
 
     for ec_number in ec_numbers:
         cur_protein.add_ec_number(ec_number)
 
     return cur_protein
 
+def extract_protein_ecs_2(protein_data):
+    ec_numbers = []
+    PROT_NODE_NAME = 'protein'
+    if PROT_NODE_NAME in protein_data:
+        prot_node = protein_data[PROT_NODE_NAME]
+        ectract_rec_alt_name_ecs(ec_numbers, prot_node)
 
-def extract_protein_ecs(protein_data):
+        extract_deblock_ecs('domain', ec_numbers, prot_node)
+        extract_deblock_ecs('component', ec_numbers, prot_node)
+    return ec_numbers
+
+
+def extract_deblock_ecs(de_block_name, ec_numbers, prot_node):
+    if de_block_name in prot_node:
+        for deblock_subnode in prot_node[de_block_name]:
+            ectract_rec_alt_name_ecs(ec_numbers, deblock_subnode)
+
+
+def ectract_rec_alt_name_ecs(ec_numbers, prot_subnode):
+    REC_NODE_NAME='recommendedName'
+    ALT_NODE_NAME='alternativeName'
+    if REC_NODE_NAME in prot_subnode:
+        add_ecs_from_ecnum_node(ec_numbers, prot_subnode[REC_NODE_NAME])
+    if ALT_NODE_NAME in prot_subnode:
+        for alt_subnode in prot_subnode[ALT_NODE_NAME]:
+            add_ecs_from_ecnum_node(ec_numbers, alt_subnode)
+
+
+def add_ecs_from_ecnum_node(ec_numbers, ec_node):
+    EC_NUM_NODE_NAME = 'ecNumber'
+    if EC_NUM_NODE_NAME in ec_node:
+        for ec_val in ec_node[EC_NUM_NODE_NAME]:
+            ec_numbers.append(ec_val['value'])
+    return ec_numbers
+
+
+
+def extract_protein_ecs_old(protein_data):
     ec_numbers = []
 
-    ec_numbers.extend(extract_ecs_from_node(select_node(protein_data, ['protein', 'recommendedName', 'ecNumber'])))
+    add_ecs_from_ecnum_node(ec_numbers, select_node(protein_data, ['protein', 'recommendedName']))
 
-    ec_numbers.extend(extract_ecs_from_node(select_node(protein_data, ['protein', 'alternativeName', 'ecNumber'])))
+    add_ecs_from_ecnum_node_iter(ec_numbers, select_node(protein_data, ['protein', 'alternativeName']))
 
     extract_ec_from_multinode(ec_numbers, protein_data, 'domain')
-
-    extract_ec_from_multinode(ec_numbers, protein_data, 'component')
+    #
+    # extract_ec_from_multinode(ec_numbers, protein_data, 'component')
 
     return ec_numbers
+
+def extract_ec_from_multinode(ec_numbers, protein_data, name_node_prefix, name_node_name):
+    name_nodes = ['protein']
+    if name_node_prefix is not None:
+        name_nodes.append(name_node_prefix)
+        node1 = select_node(protein_data, name_nodes)
+        for sub_node in node1:
+            ec_numbers.extend(extract_ecs_from_node(sub_node))
+
+
 
 
 def extract_ec_from_multinode(ec_numbers, protein_data, multi_node_name):
@@ -104,10 +152,15 @@ def ec_from_name_blocks(seq_item):
 
 def ec_from_name_block(name_block_name, seq_item):
     ec_numbers = []
-    print("blk name: {}, type: {}, is_seq", name_block_name, type(seq_item[name_block_name]), is_sequence(seq_item[name_block_name]))
-    if name_block_name in seq_item and 'ecNumber' in seq_item[name_block_name]:
-        ec_num_block = seq_item[name_block_name]['ecNumber']
-        ec_numbers.extend(extract_ecs_from_node(ec_num_block))
+    if name_block_name in seq_item:
+        tbn = type(seq_item[name_block_name])
+        is_seq = is_sequence(seq_item[name_block_name])
+        # print("blk name: {}, type: {}, is_seq", name_block_name, type(seq_item[name_block_name]), is_sequence(seq_item[name_block_name]))
+        if name_block_name in seq_item and 'ecNumber' in seq_item[name_block_name]:
+            ec_num_block = seq_item[name_block_name]['ecNumber']
+            ec_numbers.extend(extract_ecs_from_node(ec_num_block))
+    else:
+        print("no block name: {}".format(name_block_name))
     return ec_numbers
 
 
@@ -128,6 +181,12 @@ def extract_ecs_from_node(ec_node):
         for ec_val in ec_node:
             ec_numbers.append(ec_val['value'])
     return ec_numbers
+
+def add_ecs_from_ecnum_node_iter(ec_numbers, ecnum_nodes):
+    for ecnum_node in ecnum_nodes:
+        ec_numbers.extend(add_ecs_from_ecnum_node(ecnum_node))
+
+
 
 
 def is_sequence(arg):
