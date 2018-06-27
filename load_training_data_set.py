@@ -1,9 +1,9 @@
 # from readData import Report
 from constants import *
-import json
 from rest_api import make_req
 from rest_api import ResultsPageInfo
 from load_protein_info import read_proteins
+import datetime
 
 TAXONOMY_REQ_BASE="https://www.ebi.ac.uk/proteins/api/taxonomy/path/nodes?direction=BOTTOM&pageSize=3" # &id=33090&pageNumber=1&depth=1&"
 
@@ -11,9 +11,20 @@ TAXONOMY_REQ_BASE="https://www.ebi.ac.uk/proteins/api/taxonomy/path/nodes?direct
 
 tax_processed = set([])
 
+global proteins_printed
+
+proteins_printed = 0
+
+
+def print_proteins_table_headers():
+    print('pline:ACCESSION,{},EC_present:{}'.format(
+        ",".join(IPR_OF_INTEREST_LIST),EC_NUM_OF_INTEREST))
+    return
+
 
 def traverse_tax_tree():
     # process_tax_tree_level(VIRIDIPLANTAE_ID)
+    print_proteins_table_headers()
     process_tax_tree_level(3701)
 
     pass
@@ -41,11 +52,30 @@ def process_tax_tree_page(taxonomies_list):
             # we need to process cur tax_id
             print("processing a new tax_id: {}".format(tax_id))
             tax_processed.add(tax_id)
-            read_proteins(tax_id)
-            pass
-    pass
+            proteins = read_proteins(tax_id)
+
+            global proteins_printed
+            print("{} tax: {} has {} protein(s), {} proteins processed so far".format(
+                len(tax_processed), tax_id, len(proteins), proteins_printed))
+            # if len(proteins) > 0:
+            #     print(proteins)
+            print_proteins_table(proteins)
+
+def print_proteins_table(proteins):
+    for protein in proteins:
+        ipr_codes = map(lambda cur_ipr: "1" if cur_ipr in protein.ipr_groups else "0", IPR_OF_INTEREST_LIST)
+        ipr_codes_joined = ",".join(ipr_codes)
+
+        ec_presence = '1' if EC_NUM_OF_INTEREST in protein.ec_numbers else '0'
+        print_table_line = 'pline:{},{},{}'.format(
+            protein.accession, ipr_codes_joined, ec_presence)
+        print(print_table_line)
+        global proteins_printed
+        proteins_printed = proteins_printed + 1
 
 
+print('beginning at: '+str(datetime.datetime.now()))
 traverse_tax_tree()
-print("processed {} tax IDs in total".format(len(tax_processed)))
+print("processed {} tax IDs, {} protein(s) in total".format(len(tax_processed), proteins_printed))
+print('finishing at: '+str(datetime.datetime.now()))
 exit(0)

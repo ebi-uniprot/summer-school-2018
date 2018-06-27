@@ -9,14 +9,15 @@ class UniProtProtein:
     def __init__(self, accession):
         self.accession = accession
         self.ipr_groups = set([])
-        # self.ec_numbers = set([])
-        self.ec_numbers = []
+        self.ec_numbers = set([])
+        # self.ec_numbers = []
 
     def add_interpro_xref(self, ipr_grp):
         self.ipr_groups.add(ipr_grp)
 
     def add_ec_number(self, ec_number):
-        self.ec_numbers.append(ec_number)
+        # self.ec_numbers.append(ec_number)
+        self.ec_numbers.add(ec_number)
 
     def __str__(self):
         ip_groups = 'InterPro groups: {}'.format(self.ipr_groups)
@@ -36,37 +37,31 @@ def read_protein(accession):
 
 
 def read_proteins(tax_id):
+    proteins = []
     if 3702 == tax_id:
         print("skipping proteins of tax id: {}".format(tax_id))
-        return
+        return proteins
 
     protein_url = PROTEIN_REQ_BASE + "&taxid={}".format(tax_id)
 
     js_obj = make_req(protein_url)
 
-    proteins = []
+    for protein_data in js_obj:
+        cur_protein = parse_protein_json(protein_data)
+        # print(protein_data)
+        proteins.append(cur_protein)
 
-    if 63677 == tax_id:
-        for protein_data in js_obj:
-            cur_protein = parse_protein_json(protein_data)
-            # print(protein_data)
-            proteins.append(cur_protein)
-            pass
-
-    # protein_data
-
-    print("tax: {} has {} protein(s)".format(tax_id, len(proteins)))
-    if len(proteins) > 0:
-        print(proteins)
     return proteins
 
 
 def parse_protein_json(protein_data):
     # print(protein_data)
     cur_protein = UniProtProtein(protein_data['accession'])
-    for db_ref in protein_data['dbReferences']:
-        if 'InterPro' == db_ref['type']:
-            cur_protein.add_interpro_xref(db_ref['id'])
+    db_ref_node = 'dbReferences'
+    if db_ref_node in protein_data:
+        for db_ref in protein_data[db_ref_node]:
+            if 'InterPro' == db_ref['type']:
+                cur_protein.add_interpro_xref(db_ref['id'])
 
     ec_numbers = extract_protein_ecs_2(protein_data)
 
