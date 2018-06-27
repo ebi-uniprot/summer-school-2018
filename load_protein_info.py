@@ -1,5 +1,6 @@
 import json
 from rest_api import make_req
+from constants import IPR_OF_INTEREST_LIST
 
 
 PROTEIN_REQ_BASE = "https://www.ebi.ac.uk/proteins/api/proteins?offset=0&size=-1&reviewed=true"  # &taxid=3702"
@@ -202,3 +203,10 @@ def walk(node):
                 walk(item)
             else:
                 pass
+
+
+def print_accession_interpro_groups_csv(protein):
+    ipr_codes = map(lambda cur_ipr: "1" if cur_ipr in protein.ipr_groups else "0", IPR_OF_INTEREST_LIST)
+    ipr_codes_joined = ",".join(ipr_codes)
+    protein_ac_iprs = '{},{}'.format(protein.accession, ipr_codes_joined)
+    return protein_ac_iprs

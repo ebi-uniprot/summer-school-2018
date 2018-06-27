@@ -3,6 +3,7 @@ from constants import *
 from rest_api import make_req
 from rest_api import ResultsPageInfo
 from load_protein_info import read_proteins
+from load_protein_info import print_accession_interpro_groups_csv
 import datetime
 
 TAXONOMY_REQ_BASE="https://www.ebi.ac.uk/proteins/api/taxonomy/path/nodes?direction=BOTTOM&pageSize=200" # &id=33090&pageNumber=1&depth=1&"
@@ -64,12 +65,11 @@ def process_tax_tree_page(taxonomies_list):
 
 def print_proteins_table(proteins):
     for protein in proteins:
-        ipr_codes = map(lambda cur_ipr: "1" if cur_ipr in protein.ipr_groups else "0", IPR_OF_INTEREST_LIST)
-        ipr_codes_joined = ",".join(ipr_codes)
+
+        protein_ac_iprs = print_accession_interpro_groups_csv(protein)
 
         ec_presence = '1' if EC_NUM_OF_INTEREST in protein.ec_numbers else '0'
-        print_table_line = 'pline:{},{},{}'.format(
-            protein.accession, ipr_codes_joined, ec_presence)
+        print_table_line = 'pline:{},{}'.format(protein_ac_iprs, ec_presence)
         print(print_table_line)
         global proteins_printed
         proteins_printed = proteins_printed + 1
