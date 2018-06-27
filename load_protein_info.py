@@ -38,9 +38,9 @@ def read_protein(accession):
 
 def read_proteins(tax_id):
     proteins = []
-    if 3702 == tax_id:
-        print("skipping proteins of tax id: {}".format(tax_id))
-        return proteins
+#    if 3702 == tax_id:
+#        print("skipping proteins of tax id: {}".format(tax_id))
+#        return proteins
 
     protein_url = PROTEIN_REQ_BASE + "&taxid={}".format(tax_id)
 

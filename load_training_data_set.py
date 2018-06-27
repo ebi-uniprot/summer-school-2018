@@ -5,7 +5,7 @@ from rest_api import ResultsPageInfo
 from load_protein_info import read_proteins
 import datetime
 
-TAXONOMY_REQ_BASE="https://www.ebi.ac.uk/proteins/api/taxonomy/path/nodes?direction=BOTTOM&pageSize=3" # &id=33090&pageNumber=1&depth=1&"
+TAXONOMY_REQ_BASE="https://www.ebi.ac.uk/proteins/api/taxonomy/path/nodes?direction=BOTTOM&pageSize=200" # &id=33090&pageNumber=1&depth=1&"
 
 # taxonymy_url_cur =TAXONOMY_REQ_BASE + "&id={}&pageNumber={}".format(VIRIDIPLANTAE_ID, 1)
 
@@ -23,10 +23,9 @@ def print_proteins_table_headers():
 
 
 def traverse_tax_tree():
-    # process_tax_tree_level(VIRIDIPLANTAE_ID)
     print_proteins_table_headers()
-    process_tax_tree_level(3701)
-
+    process_tax_tree_level(VIRIDIPLANTAE_ID)
+    # process_tax_tree_level(3701)
     pass
 
 
@@ -44,6 +43,7 @@ def process_tax_tree_level(parent_id):
         taxonomies_list = js_obj['taxonomies']
         process_tax_tree_page(taxonomies_list)
 
+
 def process_tax_tree_page(taxonomies_list):
     for tax_idx, tax_node in enumerate(taxonomies_list):
         tax_id = int(tax_node['taxonomyId'])
@@ -60,6 +60,7 @@ def process_tax_tree_page(taxonomies_list):
             # if len(proteins) > 0:
             #     print(proteins)
             print_proteins_table(proteins)
+
 
 def print_proteins_table(proteins):
     for protein in proteins:
