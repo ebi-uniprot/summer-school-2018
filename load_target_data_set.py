@@ -25,6 +25,7 @@ parser = argparse.ArgumentParser(description='load UniProt accessions in Weka fo
 parser.add_argument('accessions', metavar='AC1[,AC2]', type=str,
                     help='comma-separated list of UniProt accessions, e.g.: Q6JKS0,E3P8I9,A0A2H4WRG2,A0A2H4WRJ3')
 
+
 args = parser.parse_args()
 print_target_proteins_table_headers()
 process_proteins(args.accessions)
