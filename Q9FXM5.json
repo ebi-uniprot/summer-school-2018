@@ -1,0 +1,469 @@
+{
+  'references': [
+    {
+      'source': {
+        'strain': [
+          {
+            'value': 'cv. Ashibi 56'
+          }
+        ]
+      },
+      'citation': {
+        'authors': [
+          'Kawabe A.',
+          'Yamane K.',
+          'Miyashita N.T.'
+        ],
+        'publication': {
+          'journalName': 'Genetics'
+        },
+        'publicationDate': '2000',
+        'dbReferences': [
+          {
+            'type': 'PubMed',
+            'id': '11063706'
+          }
+        ],
+        'type': 'journal article',
+        'title': 'DNA polymorphism at the cytosolic phosphoglucose isomerase (PgiC) locus of the wild plant Arabidopsis thaliana.',
+        'location': {
+          'firstPage': '1339',
+          'lastPage': '1347',
+          'volume': '156'
+        }
+      },
+      'scope': [
+        'NUCLEOTIDE SEQUENCE [GENOMIC DNA]'
+      ]
+    }
+  ],
+  'comments': [
+    {
+      'text': [
+        {
+          'value': 'D-glucose 6-phosphate = D-fructose 6-phosphate'
+        }
+      ],
+      'type': 'CATALYTIC_ACTIVITY'
+    },
+    {
+      'text': [
+        {
+          'value': 'Carbohydrate degradation; glycolysis; D-glyceraldehyde 3-phosphate and glycerone phosphate from D-glucose: step 2/4'
+        }
+      ],
+      'type': 'PATHWAY'
+    },
+    {
+      'text': [
+        {
+          'value': 'Homodimer',
+          'evidences': [
+            {
+              'code': 'ECO:0000250'
+            }
+          ]
+        }
+      ],
+      'type': 'SUBUNIT'
+    },
+    {
+      'locations': [
+        {
+          'location': {
+            'value': 'Cytoplasm'
+          }
+        }
+      ],
+      'type': 'SUBCELLULAR_LOCATION'
+    },
+    {
+      'text': [
+        {
+          'value': 'Belongs to the GPI family',
+          'evidences': [
+            {
+              'code': 'ECO:0000305'
+            }
+          ]
+        }
+      ],
+      'type': 'SIMILARITY'
+    },
+    {
+      'sequence': 'BAB17655.1',
+      'type': 'SEQUENCE_CAUTION',
+      'conflictType': 'ERRONEOUS_PREDICTION',
+      'evidences': [
+        {
+          'code': 'ECO:0000305'
+        }
+      ]
+    }
+  ],
+  'keywords': [
+    {
+      'value': 'Acetylation'
+    },
+    {
+      'value': 'Cytoplasm'
+    },
+    {
+      'value': 'Gluconeogenesis'
+    },
+    {
+      'value': 'Glycolysis'
+    },
+    {
+      'value': 'Isomerase'
+    }
+  ],
+  'id': 'G6PI_ARAHG',
+  'protein': {
+    'alternativeName': [
+      {
+        'shortName': [
+          {
+            'value': 'PGI'
+          }
+        ],
+        'fullName': {
+          'value': 'Phosphoglucose isomerase'
+        }
+      },
+      {
+        'shortName': [
+          {
+            'value': 'PHI'
+          }
+        ],
+        'fullName': {
+          'value': 'Phosphohexose isomerase'
+        }
+      }
+    ],
+    'recommendedName': {
+      'ecNumber': [
+        {
+          'value': '5.3.1.9'
+        }
+      ],
+      'shortName': [
+        {
+          'value': 'GPI'
+        }
+      ],
+      'fullName': {
+        'value': 'Glucose-6-phosphate isomerase, cytosolic'
+      }
+    }
+  },
+  'proteinExistence': 'Inferred from homology',
+  'dbReferences': [
+    {
+      'properties': {
+        'protein sequence ID': 'BAB17655.1',
+        'molecule type': 'Genomic_DNA',
+        'status': 'ALT_SEQ'
+      },
+      'type': 'EMBL',
+      'id': 'AB044968'
+    },
+    {
+      'type': 'ProteinModelPortal',
+      'id': 'Q9FXM5'
+    },
+    {
+      'type': 'SMR',
+      'id': 'Q9FXM5'
+    },
+    {
+      'type': 'PRIDE',
+      'id': 'Q9FXM5'
+    },
+    {
+      'properties': {
+        'reaction ID': 'UER00181'
+      },
+      'type': 'UniPathway',
+      'id': 'UPA00109'
+    },
+    {
+      'properties': {
+        'term': 'C:cytoplasm',
+        'source': 'IEA:UniProtKB-SubCell'
+      },
+      'type': 'GO',
+      'id': 'GO:0005737'
+    },
+    {
+      'properties': {
+        'term': 'F:glucose-6-phosphate isomerase activity',
+        'source': 'IEA:UniProtKB-EC'
+      },
+      'type': 'GO',
+      'id': 'GO:0004347'
+    },
+    {
+      'properties': {
+        'term': 'P:gluconeogenesis',
+        'source': 'IEA:UniProtKB-KW'
+      },
+      'type': 'GO',
+      'id': 'GO:0006094'
+    },
+    {
+      'properties': {
+        'term': 'P:glycolytic process',
+        'source': 'IEA:UniProtKB-UniPathway'
+      },
+      'type': 'GO',
+      'id': 'GO:0006096'
+    },
+    {
+      'properties': {
+        'entry name': 'SIS_PGI_1',
+        'match status': '1'
+      },
+      'type': 'CDD',
+      'id': 'cd05015'
+    },
+    {
+      'properties': {
+        'entry name': 'SIS_PGI_2',
+        'match status': '1'
+      },
+      'type': 'CDD',
+      'id': 'cd05016'
+    },
+    {
+      'properties': {
+        'match status': '1'
+      },
+      'type': 'Gene3D',
+      'id': '1.10.1390.10'
+    },
+    {
+      'properties': {
+        'entry name': 'G6P_isomerase',
+        'match status': '1'
+      },
+      'type': 'HAMAP',
+      'id': 'MF_00473'
+    },
+    {
+      'properties': {
+        'entry name': 'G6P_Isomerase'
+      },
+      'type': 'InterPro',
+      'id': 'IPR001672'
+    },
+    {
+      'properties': {
+        'entry name': 'G6P_Isomerase_C'
+      },
+      'type': 'InterPro',
+      'id': 'IPR023096'
+    },
+    {
+      'properties': {
+        'entry name': 'Phosphoglucose_isomerase_CS'
+      },
+      'type': 'InterPro',
+      'id': 'IPR018189'
+    },
+    {
+      'properties': {
+        'entry name': 'SIS_PGI_1'
+      },
+      'type': 'InterPro',
+      'id': 'IPR035476'
+    },
+    {
+      'properties': {
+        'entry name': 'SIS_PGI_2'
+      },
+      'type': 'InterPro',
+      'id': 'IPR035482'
+    },
+    {
+      'properties': {
+        'entry name': 'PTHR11469',
+        'match status': '1'
+      },
+      'type': 'PANTHER',
+      'id': 'PTHR11469'
+    },
+    {
+      'properties': {
+        'entry name': 'PGI',
+        'match status': '1'
+      },
+      'type': 'Pfam',
+      'id': 'PF00342'
+    },
+    {
+      'properties': {
+        'entry name': 'G6PISOMERASE'
+      },
+      'type': 'PRINTS',
+      'id': 'PR00662'
+    },
+    {
+      'properties': {
+        'entry name': 'P_GLUCOSE_ISOMERASE_1',
+        'match status': '1'
+      },
+      'type': 'PROSITE',
+      'id': 'PS00765'
+    },
+    {
+      'properties': {
+        'entry name': 'P_GLUCOSE_ISOMERASE_2',
+        'match status': '1'
+      },
+      'type': 'PROSITE',
+      'id': 'PS00174'
+    },
+    {
+      'properties': {
+        'entry name': 'P_GLUCOSE_ISOMERASE_3',
+        'match status': '1'
+      },
+      'type': 'PROSITE',
+      'id': 'PS51463'
+    }
+  ],
+  'features': [
+    {
+      'end': '1',
+      'category': 'MOLECULE_PROCESSING',
+      'type': 'INIT_MET',
+      'begin': '1',
+      'description': 'Removed',
+      'evidences': [
+        {
+          'source': {
+            'name': 'UniProtKB',
+            'url': 'http://www.uniprot.org/uniprot/P34795',
+            'id': 'P34795'
+          },
+          'code': 'ECO:0000250'
+        }
+      ]
+    },
+    {
+      'end': '560',
+      'ftId': 'PRO_0000180549',
+      'category': 'MOLECULE_PROCESSING',
+      'type': 'CHAIN',
+      'begin': '2',
+      'description': 'Glucose-6-phosphate isomerase, cytosolic'
+    },
+    {
+      'end': '361',
+      'category': 'DOMAINS_AND_SITES',
+      'type': 'ACT_SITE',
+      'begin': '361',
+      'description': 'Proton donor',
+      'evidences': [
+        {
+          'code': 'ECO:0000250'
+        }
+      ]
+    },
+    {
+      'end': '392',
+      'category': 'DOMAINS_AND_SITES',
+      'type': 'ACT_SITE',
+      'begin': '392',
+      'description': '',
+      'evidences': [
+        {
+          'code': 'ECO:0000250'
+        }
+      ]
+    },
+    {
+      'end': '517',
+      'category': 'DOMAINS_AND_SITES',
+      'type': 'ACT_SITE',
+      'begin': '517',
+      'description': '',
+      'evidences': [
+        {
+          'code': 'ECO:0000250'
+        }
+      ]
+    },
+    {
+      'end': '2',
+      'category': 'PTM',
+      'type': 'MOD_RES',
+      'begin': '2',
+      'description': 'N-acetylalanine',
+      'evidences': [
+        {
+          'source': {
+            'name': 'UniProtKB',
+            'url': 'http://www.uniprot.org/uniprot/P34795',
+            'id': 'P34795'
+          },
+          'code': 'ECO:0000250'
+        }
+      ]
+    }
+  ],
+  'gene': [
+    {
+      'name': {
+        'value': 'PGIC'
+      }
+    }
+  ],
+  'accession': 'Q9FXM5',
+  'sequence': {
+    'version': 2,
+    'sequence': 'MASSTALFCDTEAWKDLKGHVEDIKKTHLRDLMSDANRCQSMMMEFDGLLLDYSRQRAPVETMDKLLNLAKAAQLTEKISRMFNGEHINSTENRSVLHVALRAPKDAVIKADGKNVVPEVWNVLDKIKEFSEKIRSGSWVGATGKPLKDVIAIGIGGSFLGPLFVHTALQTDPEALESAKGRQLRFLANIDPVDVARNIKGLNPETTLVVVVSKTFTTAETMLNARTLREWITAALGASAVAKHMVAVSTNLALVEKFGIDPNNAFAFWDWVGGRYSVCSAVGVLPLSLQYGFSVVEKFLKGASSIDQHFQSTPFEKNIPVLLGLLSVWNVSFLGYPARAILPYSQALEKFAPHIQQVSMESNGKGVSIDGLPLPFETGEVDFGEPGTNGQHSFYQLIHQGRVIPCDFIGIVKSQQPVYLKGEVVSNHDELMSNFFAQPDALAYGKTPEQLQKENVSENLIPHKTFSGNRPSLSLLLPELTAYNVGQLLAIYEHRVAVQGFVWGINSFDQWGVELGKVLATQVRKQLHSSRTQGTALEGFNYSTTTLLKRYLETSSEPQM',
+    'length': 560,
+    'mass': 61754,
+    'modified': '2001-11-02'
+  },
+  'organism': {
+    'lineage': [
+      'Eukaryota',
+      'Viridiplantae',
+      'Streptophyta',
+      'Embryophyta',
+      'Tracheophyta',
+      'Spermatophyta',
+      'Magnoliophyta',
+      'eudicotyledons',
+      'Gunneridae',
+      'Pentapetalae',
+      'rosids',
+      'malvids',
+      'Brassicales',
+      'Brassicaceae',
+      'Camelineae',
+      'Arabidopsis'
+    ],
+    'taxonomy': 63677,
+    'names': [
+      {
+        'value': 'Arabidopsis halleri subsp. gemmifera',
+        'type': 'scientific'
+      },
+      {
+        'value': 'Arabis gemmifera',
+        'type': 'common'
+      }
+    ]
+  },
+  'info': {
+    'version': 66,
+    'created': '2001-11-02',
+    'type': 'Swiss-Prot',
+    'modified': '2018-05-23'
+  }
+}
