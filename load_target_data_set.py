@@ -2,6 +2,7 @@ from load_protein_info import read_protein
 from load_protein_info import print_accession_interpro_groups_csv
 import argparse
 from constants import IPR_OF_INTEREST_LIST
+from constants import EC_NUM_OF_INTEREST
 
 
 def process_proteins(accessions_string):
@@ -10,13 +11,13 @@ def process_proteins(accessions_string):
     for ac in accessions:
         protein_json = read_protein(ac)
         p_line = print_accession_interpro_groups_csv(protein_json)
-        print (p_line)
+        print (p_line+',?')
         proteins_processed += 1
     print("*** processed {} protein(s) in total".format(proteins_processed))
 
 
 def print_target_proteins_table_headers():
-    print('ACCESSION,{}'.format(",".join(IPR_OF_INTEREST_LIST)))
+    print('ACCESSION,{},EC_present:{}'.format(",".join(IPR_OF_INTEREST_LIST),EC_NUM_OF_INTEREST))
     return
 
 
